@@ -1,6 +1,6 @@
 <template>
   <div class="bg-black border-t border-stone-800 py-10 text-stone-400 text-sm">
-    <div class="flex gap-3 justify-center">
+    <div class="flex flex-col md:flex-row items-center gap-3 justify-center">
         <p>This project was created by: </p>
         <a 
             href="https::/emlacabe.vercel.app"

@@ -1,24 +1,24 @@
 <template>
-  <header class="flex justify-between items-center h-20 bg-black border-b border-stone-700">
+  <header class="flex justify-between items-center h-20 bg-black border-b border-stone-700 px-2">
     <RouterLink :to="{name: 'home'}">
         <div class="md:text-lg tracking-widest uppercase">
-            <strong>Floyd</strong> <span class="font-light">My Weather</span>
+            <strong>Floyd</strong> <span class="font-light">My Weather </span>
             <i class="fa-solid fa-wind text-xl"></i>
         </div>
     </RouterLink>
 
     <nav class="flex items-center gap-4">
         <i 
-            class="fa-solid fa-circle-info md:text-xl cursor-pointer hover:text-emerald-400"
+            class="fa-solid fa-circle-info text-xl cursor-pointer hover:text-emerald-400"
             @click="setModalActive"
         ></i>
         <a
-            href="" 
+            href="https://github.com/estaniml/floyd-myweather" 
             target="_blank"
-            class="border rounded-lg px-2 py-1 text-sm flex items-center gap-2 hover:bg-white hover:text-black font-bold transition-all duration-300 ease-linear"
+            class="md:border rounded-lg md:px-2 md:py-1 text-sm flex items-center md:gap-2 hover:bg-white hover:text-black font-bold transition-all duration-300 ease-linear"
         >
-            See repository
-            <i class="fa-brands fa-github"></i>
+            <span class="hidden md:inline-block">See repository</span>
+            <i class="fa-brands fa-github text-xl md:text-md"></i>
         </a>
         <HelpModal
             :modalActive="modalActive"

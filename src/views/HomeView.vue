@@ -1,12 +1,16 @@
 <template>
-  <main class="pt-10 bg-black min-h-screen">
+  <main class="pt-4 md:pt-10 bg-black min-h-screen">
     <h2 class="mb-4 text-2xl text-emerald-500 font-bold">★ Your cities</h2>
     <ul class="mb-8 flex gap-4">
-      <li class="border rounded-lg min-w-[150px] w-fit flex items-center justify-around gap-2 p-2 bg-stone-950 cursor-pointer hover:bg-stone-900">
-        <h3 class="text-xl font-bold">Parana</h3>
+      <li 
+        class="border rounded-lg min-w-[100px] md:min-w-[150px] w-fit flex items-center justify-around gap-2 p-2 bg-stone-950 cursor-pointer hover:bg-stone-900"
+        @click="() => selectWeather(e.target.value)"
+        value="Parana"
+      >
+        <h3 class="text-lg md:text-xl font-bold">Parana</h3>
       </li>
-      <li class="border rounded-lg min-w-[150px] w-fit flex items-center justify-around gap-2 p-2 bg-stone-950 cursor-pointer hover:bg-stone-900">
-        <h3 class="text-xl font-bold">Raleigh</h3>
+      <li class="border rounded-lg min-w-[100px] md:min-w-[150px] w-fit flex items-center justify-around gap-2 p-2 bg-stone-950 cursor-pointer hover:bg-stone-900">
+        <h3 class="text-lg md:text-xl font-bold">Raleigh</h3>
       </li>
     </ul>
 
@@ -27,26 +31,44 @@
 
     <WeatherData 
       :data="data"
+      v-if="data"
+    />
+
+    <WeatherDataLoader 
+      v-else-if="loading"
+    />
+
+    <ErrorMessage
+      v-if="error"
+      :error="error"
     />
     
   </main>
 </template>
 
 <script>
+import ErrorMessage from '../components/ErrorMessage.vue'
 import WeatherData from '../components/WeatherData.vue'
+import WeatherDataLoader from '../components/WeatherDataLoader.vue'
 
 export default {
-  components: { WeatherData },
+  components: { WeatherData, WeatherDataLoader, ErrorMessage },
   data() {
     return {
       search: '',
-      data: null
+      data: null,
+      loading: false,
+      error: false
     }
   },
   mounted() {
   },
   methods: {
+    selectWeather(value){
+      this.search = value
+    },
     async searchWeather() {
+      this.loading = true
       if( this.search.length < 3){
         this.$refs.searchInput.focus()
         return
@@ -67,8 +89,11 @@ export default {
         console.log(result);
         this.data = result
         this.search = ''
+        this.loading = false
       } catch (error) {
         console.error(error);
+        this.loading = false
+        this.error = true
       }
     }
   }

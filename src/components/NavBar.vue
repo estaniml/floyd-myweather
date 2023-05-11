@@ -31,13 +31,26 @@
             
             <div>
                 <h2 class="text-xl mb-2 uppercase font-bold">How it works</h2>
-                <p>I’ve written a few thousand words on why traditional “semantic class names” are the reason CSS is hard to maintain, but the truth is you’re never going to believe me until you actually try it. If you can suppress the urge to retch long enough to give it a chance, I really think you'll wonder how you ever worked with CSS any other way.</p>
+                <p>The web app utilizes the Forecast API to provide users with convenient access to weather information. Users can easily search for any city and retrieve the weather forecast for the day as well as upcoming days. Additionally, it offers a personalized feature that allows users to create a list of their favorite cities for quick and easy access. By simply adding cities to their saved list, users can stay updated on the weather conditions of multiple locations with just a few clicks.</p>
             </div>
 
             
             <div>
-                <h3 class="text-xl mb-2 uppercase font-bold">Get city</h3>
-                <p>Utility classes help you work within the constraints of a system instead of littering your stylesheets with arbitrary values. They make it easy to be consistent with color choices, spacing, typography, shadows, and everything else that makes up a well-engineered design system.</p>
+                <h3 class="text-xl mb-2 uppercase font-bold">See more</h3>
+                <div class="flex flex-col gap-2">
+                    <a href="https://github.com/estaniml/floyd-myweather" class="flex items-center gap-2 text-stone-300 hover:text-emerald-400">
+                        <i class="fa-brands fa-github text-xl md:text-md"></i>
+                        Github Repository
+                    </a>
+                    <a href="https://emlacabe.vercel.app" class="flex items-center gap-2 text-stone-300 hover:text-emerald-400">
+                        <i class="fa-solid fa-e text-xl md:text-md"></i>
+                        My Portfolio
+                    </a>
+                    <a href="https://www.linkedin.com/in/emartinezlacabe/" class="flex items-center gap-2 text-stone-300 hover:text-emerald-400">
+                        <i class="fa-brands fa-linkedin text-xl md:text-md"></i>
+                        My Linkedin
+                    </a>
+                </div>
             </div>
         </HelpModal>
     </nav>

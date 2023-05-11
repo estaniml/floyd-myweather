@@ -6,6 +6,7 @@
           <i class="fa-solid fa-location-dot"></i> {{this.data.location.name}}
           <button 
             class="border border-emerald-300 flex md:hidden items-center gap-2 px-2 rounded-full overflow-hidden h-8 w-28 focus:bg-emerald-500 focus:text-white text-emerald-500 transition-all duration-300 ease-linear whitespace-nowrap text-lg"
+            @click="handleNewCity"
           ><strong class="text-4xl ">+</strong> Add city</button>
         </h2>
         <div class="flex items-center justify-esnd mt-4 gap-2">
@@ -59,6 +60,11 @@ export default {
     },
     mounted() {
       console.log(this.data);
+    },
+    methods: {
+      handleNewCity() {
+        this.$emit('show-weather', this.data.location.name)
+      }
     }
 }
 </script>

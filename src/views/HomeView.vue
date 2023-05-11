@@ -1,18 +1,10 @@
 <template>
   <main class="pt-4 md:pt-10 bg-black min-h-screen">
     <h2 class="mb-4 text-2xl text-emerald-500 font-bold">★ Your cities</h2>
-    <ul class="mb-8 flex gap-4">
-      <li 
-        class="border rounded-lg min-w-[100px] md:min-w-[150px] w-fit flex items-center justify-around gap-2 p-2 bg-stone-950 cursor-pointer hover:bg-stone-900"
-        @click="() => selectWeather(e.target.value)"
-        value="Parana"
-      >
-        <h3 class="text-lg md:text-xl font-bold">Parana</h3>
-      </li>
-      <li class="border rounded-lg min-w-[100px] md:min-w-[150px] w-fit flex items-center justify-around gap-2 p-2 bg-stone-950 cursor-pointer hover:bg-stone-900">
-        <h3 class="text-lg md:text-xl font-bold">Raleigh</h3>
-      </li>
-    </ul>
+    <MyCities 
+      @show-weather="showCityWeather"
+      :myCitiesList="this.myCities"
+    />
 
     <h2 class="mb-4 text-2xl text-emerald-500 font-bold">☀ Search a new city</h2>
     <div class="flex items-center gap-2 h-full mb-8">
@@ -31,6 +23,7 @@
 
     <WeatherData 
       :data="data"
+      @save-city="saveNewCity"
       v-if="data"
     />
 
@@ -50,24 +43,30 @@
 import ErrorMessage from '../components/ErrorMessage.vue'
 import WeatherData from '../components/WeatherData.vue'
 import WeatherDataLoader from '../components/WeatherDataLoader.vue'
+import MyCities from '../components/MyCities.vue'
 
 export default {
-  components: { WeatherData, WeatherDataLoader, ErrorMessage },
+  components: { WeatherData, WeatherDataLoader, ErrorMessage, MyCities },
   data() {
     return {
       search: '',
       data: null,
       loading: false,
-      error: false
+      error: false,
+      myCities: []
     }
   },
   mounted() {
-  },
+    console.log(this.myCities);
+    this.loadMyCities()
+  },  
   methods: {
-    selectWeather(value){
-      this.search = value
+    showCityWeather(city){
+      this.search = city
+      this.searchWeather()
     },
     async searchWeather() {
+      console.log(this.search);
       this.loading = true
       if( this.search.length < 3){
         this.$refs.searchInput.focus()
@@ -95,6 +94,12 @@ export default {
         this.loading = false
         this.error = true
       }
+    },
+    loadMyCities(){
+      this.myCities = localStorage.getItem('cities');
+    },
+    saveNewCity(city) {
+      localStorage.setItem('cities', city);
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full md:w-3/5 px-2 md:mx-auto font-Raleway overflow-hidden">
+  <div class="w-full lg:w-4/5 xl:w-3/5 px-2 lg:mx-auto font-Raleway overflow-hidden">
     <NavBar />
     <router-view></router-view>
     <MainFooter />

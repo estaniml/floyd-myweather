@@ -3,6 +3,7 @@
     <h2 class="mb-4 text-2xl text-emerald-500 font-bold">★ Your cities</h2>
     <MyCities 
       @show-weather="showCityWeather"
+      @remove-city="removeCity"
       :myCitiesList="this.myCities"
     />
 
@@ -24,6 +25,7 @@
     <WeatherData 
       :data="data"
       @save-city="saveNewCity"
+      :myCitiesList="this.myCities"
       v-if="data"
     />
 
@@ -57,7 +59,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.myCities);
     this.loadMyCities()
   },  
   methods: {
@@ -95,11 +96,24 @@ export default {
         this.error = true
       }
     },
-    loadMyCities(){
-      this.myCities = localStorage.getItem('cities');
+    loadMyCities() {
+      const cities = localStorage.getItem('cities');
+      this.myCities = cities ? JSON.parse(cities) : [];
     },
     saveNewCity(city) {
-      localStorage.setItem('cities', city);
+      if (this.myCities.includes(city)) {
+        return;
+      }
+      this.myCities.push(city);
+      localStorage.setItem('cities', JSON.stringify(this.myCities));
+      console.log(city);
+    },
+    removeCity(city) {
+      const index = this.myCities.indexOf(city);
+      if (index !== -1) {
+        this.myCities.splice(index, 1);
+        localStorage.setItem('cities', JSON.stringify(this.myCities));
+      }
     }
   }
 }

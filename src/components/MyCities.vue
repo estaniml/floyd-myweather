@@ -1,5 +1,5 @@
 <template>
-    <ul v-if="myCitiesList" class="mb-8 flex gap-4">
+    <ul v-if="myCitiesList.length > 0" class="mb-8 flex gap-4">
       <li
         v-for="myCity in myCitiesList"
         :key="myCity"

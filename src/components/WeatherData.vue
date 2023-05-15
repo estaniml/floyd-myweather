@@ -23,19 +23,19 @@
 
       <div class="">
         <div class="flex justify-between">
-          <p class="text-xl text-stone-300"><i class="fa-solid fa-calendar-days"></i> Date: {{this.data.forecast.forecastDate.slice(0,9)}}</p>
+          <p class="text-xl text-stone-300"><i class="fa-solid fa-calendar-days"></i> {{ getNameDay }}, {{this.data.forecast.items[this.currentWeather].date}}</p>
           <p class="text-lg text-stone-300"><i class="fa-solid fa-square-up-right"></i> Source: {{this.data.forecast.source}} </p>
         </div>
 
         <div class="flex flex-col md:flex-row gap-4">
           <div class="flex items-center justify-center md:justify-end mt-4 gap-8 md:gap-4 text-xl bg-gradient-to-bl from-stone-950 to-stone-800 p-4 rounded-lg">
-            <span><strong class="text-5xl">{{this.data.forecast.items[0].temperature.max}}</strong> º max</span>
-            <span><strong class="text-5xl">{{this.data.forecast.items[0].temperature.min}}</strong> º min</span>
+            <span><strong class="text-5xl">{{this.data.forecast.items[this.currentWeather].temperature.max}}</strong> º max</span>
+            <span><strong class="text-5xl">{{this.data.forecast.items[this.currentWeather].temperature.min}}</strong> º min</span>
           </div>
 
           <div class="flex items-center justify-center md:justify-end mt-4 gap-8 md:gap-4 text-xl bg-gradient-to-bl from-stone-950 to-stone-900 p-4 rounded-lg">
-            <span><strong class="text-5xl">{{this.data.forecast.items[0].prec.probability}}</strong>% <i class="fa-solid fa-cloud-rain text-xl"></i></span>
-            <span><strong class="text-5xl">{{this.data.forecast.items[0].wind.max}}</strong>km/h <i class="fa-solid fa-wind text-xl"></i></span>
+            <span><strong class="text-5xl">{{this.data.forecast.items[this.currentWeather].prec.probability}}</strong>% <i class="fa-solid fa-cloud-rain text-xl"></i></span>
+            <span><strong class="text-5xl">{{this.data.forecast.items[this.currentWeather].wind.max}}</strong>km/h <i class="fa-solid fa-wind text-xl"></i></span>
           </div>
         </div>
       </div>
@@ -43,22 +43,27 @@
 
     <ul class="mt-4 md:mt-10 py-4 flex gap-4 overflow-x-auto">
       <WeatherDay 
+        v-for="(day, index) in this.data?.forecast.items"
         :key="index"
-        v-for="(day, index) in this.data?.forecast.items.slice(1)"
         :day="day"
+        :isActive="this.currentWeather == index"
+        @click="this.currentWeather = index"
       />
     </ul>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
 import WeatherDay from './WeatherDay.vue';
+
 export default {
   components: { WeatherDay },
     props: ['data', 'myCitiesList'],
     data() {
       return {
-        day: 1
+        day: 1,
+        currentWeather: 0
       }
     },
     computed: {
@@ -69,7 +74,10 @@ export default {
       longitude(){
         const long = String(this.data.location.coordinates.longitude).slice(0,5)
         return long
-      }
+      },
+      getNameDay() {
+        return moment(this.data.forecast.items[this.currentWeather].date).format('dddd')
+      },
     },  
     methods: {
       handleNewCity() {

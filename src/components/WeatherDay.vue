@@ -35,18 +35,13 @@
 import moment from 'moment'
 
 export default {
-    props: ['key', 'day', 'isActive'],
+    props: ['day', 'isActive'],
     computed: {
         getNameDay() {
             return moment(this.day.date).format('dddd')
         },
         
     },
-    mounted() {
-        console.log(this.key, 'id');
-        console.log(this.isActive, 'cw');
-        console.log(this.day, 'cw');
-    }
 }
 </script>
 

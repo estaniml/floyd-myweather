@@ -2,6 +2,7 @@
   <div class="border border-red-800 p-5 bg-stone-950 rounded-lg w-fit flex items-center mx-auto gap-4">
     <i class="fa-sharp fa-solid fa-circle-exclamation text-xl text-red-600"></i>
     <p>Server Error! Try again later</p>
+    <p>{{ this.error.message }}</p>
   </div>
 </template>
 

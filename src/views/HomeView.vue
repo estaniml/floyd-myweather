@@ -67,7 +67,6 @@ export default {
       this.searchWeather()
     },
     async searchWeather() {
-      console.log(this.search);
       this.loading = true
       if( this.search.length < 3){
         this.$refs.searchInput.focus()
@@ -86,12 +85,10 @@ export default {
       try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result);
         this.data = result
         this.search = ''
         this.loading = false
       } catch (error) {
-        console.error(error);
         this.loading = false
         this.error = true
       }
@@ -106,7 +103,6 @@ export default {
       }
       this.myCities.push(city);
       localStorage.setItem('cities', JSON.stringify(this.myCities));
-      console.log(city);
     },
     removeCity(city) {
       const index = this.myCities.indexOf(city);

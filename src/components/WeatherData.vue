@@ -22,7 +22,7 @@
       </div>
 
       <div class="">
-        <div class="flex justify-between">
+        <div class="flex flex-col md:flex-row md:justify-between">
           <p class="text-xl text-stone-300"><i class="fa-solid fa-calendar-days"></i> {{ getNameDay }}, {{this.data.forecast.items[this.currentWeather].date}}</p>
           <p class="text-lg text-stone-300"><i class="fa-solid fa-square-up-right"></i> Source: {{this.data.forecast.source}} </p>
         </div>
